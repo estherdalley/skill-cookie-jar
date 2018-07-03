@@ -15,11 +15,11 @@ from mycroft.util.log import LOG
 # from the MycroftSkill class.  You extend this class as shown below.
 
 # TODO: Change "Template" to a unique name for your skill
-class TemplateSkill(MycroftSkill):
+class CookieJarSkill(MycroftSkill):
 
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
-        super(TemplateSkill, self).__init__(name="TemplateSkill")
+        super(CookieJarSkill, self).__init__(name="CookieJarSkill")
         
         # Initialize working variables used within the skill.
         self.count = 0
@@ -41,6 +41,11 @@ class TemplateSkill(MycroftSkill):
         # Mycroft will randomly speak one of the lines from the file
         #    dialogs/en-us/hello.world.dialog
         self.speak_dialog("hello.world")
+
+    @intent_handler(IntentBuilder("".require("Crow").require("Midnight"))
+    def handle_password_intent(self, message):
+	self.speak_dialog("code.reply")
+
 
     @intent_handler(IntentBuilder("").require("Count").require("Dir"))
     def handle_count_intent(self, message):
